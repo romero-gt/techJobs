@@ -1,0 +1,26 @@
+{
+  "name": "techjobs",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "server": "npx json-server db.json --watch  --port 3000"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/romero-gt/techJobs.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/romero-gt/techJobs/issues"
+  },
+  "homepage": "https://github.com/romero-gt/techJobs#readme",
+  "dependencies": {
+    "json-server": "^1.0.0-beta.3",
+    "jsonserver": "^0.1.6"
+  }
+}
