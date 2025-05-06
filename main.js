@@ -11,10 +11,6 @@ async function carregarVagas() {
   }
 }
 
-function mostrarErro(msg) {
-  Swal.fire("Erro", msg, "error");
-}
-
 function mostrarVagas(vagas) {
   const container = document.getElementById("job-list");
   container.innerHTML = vagas
@@ -36,4 +32,14 @@ function mostrarVagas(vagas) {
     `
     )
     .join(" ");
+}
+
+function carregarCandidatos() {
+  axios.get("http://localhost:3000/users")
+  .then(res => mostrarCandidatos(res.data))
+  .catch(() => mostrarErro('Erro ao carregar candidatos!'))
+}
+
+function mostrarErro(msg) {
+  Swal.fire("Erro", msg, "error");
 }
