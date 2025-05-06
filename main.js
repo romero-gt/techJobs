@@ -1,0 +1,39 @@
+window.onload = () => {
+  carregarVagas();
+};
+
+async function carregarVagas() {
+  try {
+    const { data: vagas } = await axios.get("http://localhost:3000/jobs");
+    mostrarVagas(vagas);
+  } catch (err) {
+    mostrarErro("Erro ao carregar vagas!");
+  }
+}
+
+function mostrarErro(msg) {
+  Swal.fire("Erro", msg, "error");
+}
+
+function mostrarVagas(vagas) {
+  const container = document.getElementById("job-list");
+  container.innerHTML = vagas
+    .map(
+      (vaga) => `
+      <div class="col-md-4 mb-4">
+        <div class="card border-info shadow-sm">
+          <div class="card-body">
+            <h5 class="card-title">${vaga.title}</h5>
+            <p class="card-text"><strong>Empresa:</strong> ${vaga.company}</p>
+            <p class="card-text">
+              <span class="badge rounded-pill bg-info text-muted">
+                ${vaga.location || "Não informado"}
+              </span>
+            </p>
+          </div>
+        </div>
+      </div>
+    `
+    )
+    .join(" ");
+}

@@ -1,0 +1,13 @@
+body {
+    background: linear-gradient(135deg, #011533, #1c3d9a); /* Angulo de direção */
+    color: white;
+  }
+  .hero {
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    text-align: center;
+  }
+  
