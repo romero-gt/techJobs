@@ -65,7 +65,7 @@ function mostrarCandidatos(candidatos) {
 
 function abrirModalUsuario(acao, id = null) {
   const titulo = acao == "editar" ? "Editar Candidato" : "Novo Candidato";
-  const exibirFormulario = ((name = ""), (email = "") => {
+  const exibirFormulario = (name = '', email = '') => {
     Swal.fire({
       title: titulo,
       html: `
@@ -87,20 +87,18 @@ function abrirModalUsuario(acao, id = null) {
       }
     }).then(result => {
       if(!result.isConfirmed) return;
-
       const url = id? `http://localhost:3000/users/${id}` : `http://localhost:3000/users/`
-
       const metodo = id ? axios.put : axios.post;
 
       metodo(url, result.value)
       .then(() => {
-        Swal.fire('Sucesso', `Candidato ${id ? 'atualizado' : 'cadatrado'}!`, 'success')
+        Swal.fire('Sucesso', `Candidato ${id ? 'atualizado' : 'cadastrado'}!`, 'success')
         carregarCandidatos();
       }).catch(() => {
         mostrarErro('Nâo foi possível salvar!')
       })
     })
-  });
+  };
 
   if (acao === "editar" && id) {
     axios
