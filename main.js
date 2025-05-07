@@ -1,5 +1,6 @@
 window.onload = () => {
     carregarVagas ();
+    mostrarCandidatos ();
     } 
 
 async function carregarVagas () {
@@ -37,6 +38,35 @@ function carregarCandidatos () {
         .catch(() => mostrarErro ('Erro ao buscar candidatos!')) 
 }
 
+function mostrarCandidatos (candidatos) {
+  const container = document.getElementById('candidates');
+  container.innerHTML = candidatos.map(user => `
+    
+    <div class="col-md-4 mb-3">
+      <div class="card border-primary shadow-sm">
+        <div class="card-body">
+          <h5 class="card-title">${user.name}</h5>
+          <h6 class="card-subtitle mb-2 text-muted">${user.email}</h6>
+          <div class="mt-3">
+            <button class="btn btn-sm btn-warning me-2" onclick="abrirModalUsuario('editar', '${user.id}')">Editar</button>
+            <button class="btn btn-sm btn-danger" onclick="excluirUsuario('${user.id}')">Excluir</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  `
+).join('');
+}
+
+
+let candidatosVisiveis = false;
+function alternarCandidatos () {
+  const container = document.getElementById('candidates');
+  candidatosVisiveis = !candidatosVisiveis; //toggle (liga/desliga) toggle means alternar
+  container.style.display = candidatosVisiveis ? 'flex' : 'none';  
+  if (candidatosVisiveis) carregarCandidatos ();
+}
+window.toggleCandidates = alternarCandidatos;  
 
 function mostrarErro(msg) {
     Swal.fire('Erro', msg, 'error')
