@@ -31,14 +31,46 @@ function mostrarVagas(vagas) {
       </div>
     `
     )
-    .join(" ");
+    .join("");
 }
 
 function carregarCandidatos() {
-  axios.get("http://localhost:3000/users")
-  .then(res => mostrarCandidatos(res.data))
-  .catch(() => mostrarErro('Erro ao carregar candidatos!'))
+  axios
+    .get("http://localhost:3000/users")
+    .then((res) => mostrarCandidatos(res.data))
+    .catch(() => mostrarErro("Erro ao carregar candidatos!"));
 }
+
+function mostrarCandidatos(candidatos) {
+  const container = document.getElementById("candidates");
+  container.innerHTML = candidatos
+    .map(
+      (user) => `
+    <div class="col-md-4 mb-3">
+      <div class="card border-primary shadow-sm">
+        <div class="card-body">
+          <h5 class="card-title">${user.name}</h5>
+          <h6 class="card-subtitle mb-2 text-muted">${user.email}</h6>
+          <div class="mt-3">
+            <button class="btn btn-sm btn-warning me-2" onclick="abrirModalUsuario('editar', '')">Editar</button>
+            <button class="btn btn-sm btn-danger" onclick="excluirUsuario('')">Excluir</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    `
+    )
+    .join("");
+}
+
+let candidatosVisiveis = false;
+function alternarCandidatos() {
+  const container = document.getElementById("candidates");
+  candidatosVisiveis = !candidatosVisiveis;
+  container.style.display = candidatosVisiveis ? "flex" : "none";
+  if (candidatosVisiveis) carregarCandidatos();
+}
+window.toggleCandidates = alternarCandidatos;
 
 function mostrarErro(msg) {
   Swal.fire("Erro", msg, "error");
