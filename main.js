@@ -52,8 +52,8 @@ function mostrarCandidatos(candidatos) {
           <h5 class="card-title">${user.name}</h5>
           <h6 class="card-subtitle mb-2 text-muted">${user.email}</h6>
           <div class="mt-3">
-            <button class="btn btn-sm btn-warning me-2" onclick="abrirModalUsuario('editar', '')">Editar</button>
-            <button class="btn btn-sm btn-danger" onclick="excluirUsuario('')">Excluir</button>
+            <button class="btn btn-sm btn-warning me-2" onclick="abrirModalUsuario('editar', '${user.id}')">Editar</button>
+            <button class="btn btn-sm btn-danger" onclick="excluirUsuario('${user.id}')">Excluir</button>
           </div>
         </div>
       </div>
@@ -71,6 +71,25 @@ function alternarCandidatos() {
   if (candidatosVisiveis) carregarCandidatos();
 }
 window.toggleCandidates = alternarCandidatos;
+
+function excluirUsuario(id) {
+  Swal.fire({
+    title: "Tem certeza?",
+    text: "Essa ação não poderá ser desfeita!",
+    icon: "warning",
+    showCancelButton: true,
+    confirmButtonText: "Sim, excluir",
+    cancelButtonText: "Cancelar",
+  }).then((result) => {
+    if (!result.isConfirmed) return;
+    axios
+      .delete(`http://localhost:3000/users/${id}`)
+      .then(() => {
+        Swal.fire("Excluído!", " ", "Success");
+      })
+      .catch(() => mostrarErro("Não foi possível excluir!"));
+  });
+}
 
 function mostrarErro(msg) {
   Swal.fire("Erro", msg, "error");
