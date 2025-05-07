@@ -63,6 +63,57 @@ function mostrarCandidatos(candidatos) {
     .join("");
 }
 
+function abrirModalUsuario(acao, id = null) {
+  const titulo = acao == "editar" ? "Editar Candidato" : "Novo Candidato";
+  const exibirFormulario = ((name = ""), (email = "") => {
+    Swal.fire({
+      title: titulo,
+      html: `
+        <input id="swal-nome" class="swal2-input" placeholder="Nome" value="${name}">
+        <input id="swal-email" class="swal2-input" placeholder="Email" value="${email}">
+      `,
+      confirmButtonText: 'Salvar',
+      focusConfirm: false,
+      preConfirm: () => {
+        const name = document.getElementById('swal-nome').value.trim();
+        const email = document.getElementById('swal-email').value.trim();
+
+        if(!name || !email) {
+          Swal.showValidationMessage('Preencha todos os campos')
+          return false;
+        }
+
+        return {name, email}; // Retorna os dados que serão enviados ao backend
+      }
+    }).then(result => {
+      if(!result.isConfirmed) return;
+
+      const url = id? `http://localhost:3000/users/${id}` : `http://localhost:3000/users/`
+
+      const metodo = id ? axios.put : axios.post;
+
+      metodo(url, result.value)
+      .then(() => {
+        Swal.fire('Sucesso', `Candidato ${id ? 'atualizado' : 'cadatrado'}!`, 'success')
+        carregarCandidatos();
+      }).catch(() => {
+        mostrarErro('Nâo foi possível salvar!')
+      })
+    })
+  });
+
+  if (acao === "editar" && id) {
+    axios
+      .get(`http://localhost:3000/users/${id}`)
+      .then((res) => exibirFormulario(res.data.name, res.data.email))
+      .catch(() => mostrarErro("Usuário não encontrado!"));
+  } else {
+    exibirFormulario();
+  }
+}
+
+window.createUser = () => abrirModalUsuario('novo');
+
 let candidatosVisiveis = false;
 function alternarCandidatos() {
   const container = document.getElementById("candidates");
