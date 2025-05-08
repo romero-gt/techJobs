@@ -1,24 +1,29 @@
 {
   "users": [
     {
-      "name": "Carlos",
-      "email": "email.com",
+      "name": "Carlos Braga",
+      "email": "carlos12@email.com",
       "id": "1"
     },
     {
       "name": "Marina Silva",
-      "email": "marina@teste.",
+      "email": "marina@teste.com",
       "id": "2"
     },
     {
-      "id": "f2cb",
-      "name": "Fla",
-      "email": "teste"
+      "name": "Maria Oliveira",
+      "email": "moliveira@email.com.br",
+      "id": "f713"
     },
     {
-      "id": "f713",
-      "name": "Fla",
-      "email": "teste teste"
+      "id": "fcbb",
+      "name": "Sérgio Moura",
+      "email": "sergim@testemail.com"
+    },
+    {
+      "id": "6003",
+      "name": "Paulo Moura",
+      "email": "paulo@teste.com"
     }
   ],
   "jobs": [
