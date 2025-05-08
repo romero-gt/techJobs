@@ -13,20 +13,26 @@
         <a href="index.html" class="btn btn-secondary">Voltar ao Início</a>
     </div>
     <hr />
+    <div>
+    </div>
     <div class="d-flex justify-content-between align-items-center mb-3">
         <h3>Minhas Vagas</h3>
+        <div class="d-flex">
+            <button class="btn btn-success" onclick="createJob()">Nova Vaga</button>
+        </div>
+
     </div>
     <div id="job-list" class="row mb-5"></div>
     <div class="d-flex justify-content-between align-items-center mb-3">
         <h3>Candidatos Disponíveis</h3>
         <div>
-            <button class="btn btn-primary me-5 my-3" onclick="toggleCandidates()">Ver/Ocultar Candidatos</button>
+            <button class="btn btn-primary me-5 my-3" onclick="toggleCandidates()"> Ver/Ocultar Candidatos</button>
             <button class="btn btn-success" onclick="createUser()">Novo Candidato</button>
         </div>
     </div>
     <div id="candidates" class="row" style="display: none;"></div>
 
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-    <script src="main.js"></script>
+    <script src="script.js"></script>
 </body>
 </html>
