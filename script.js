@@ -95,15 +95,22 @@ function abrirModalUsuario(id) {
     })
     .then(result => {
       if(!result.isConfirmed) return;
-
-      const url = `http://localhost:3000/users/${id}`
-      axios.put(url, result.value)
-        .then(() => {
-          Swal.fire('Sucesso', `Candidato ${id} atualizado!`, 'success');
-          carregarCandidatos();
-        })
+      Swal.fire('Sucesso', `Candidato ${id} atualizado!`, `success`)
+      .then(() => {
+        const url = `http://localhost:3000/users/${id}`;
+        if (result.isConfirmed) {
+          axios.put(url, result.value)
+            .then(() => {
+              carregarCandidatos();
+            })
+            .catch(() => {
+              mostrarErro('Não foi possível salvar.');
+            });
+        }
+      })
+      
         .catch(() => {
-          mostrarErro('Não foi possível salver.')
+          mostrarErro('Não foi possível salvar.')
         })
     })
   }
@@ -120,8 +127,7 @@ function abrirModalUsuario(id) {
   })
 }
 
-function createUser() {
-  
+function createUser(id) {
 }
 
 function excluirUsuario(id) {

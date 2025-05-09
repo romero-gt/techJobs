@@ -6,8 +6,8 @@
       "id": "1"
     },
     {
-      "name": "João Ricardo",
-      "email": "joao@email.com",
+      "name": "Paulo Andrade",
+      "email": "paulo@email.com",
       "id": "2"
     },
     {
@@ -46,9 +46,7 @@
       "email": "gabriel@email.com"
     },
     {
-      "id": "10",
-      "name": "Sofia Ferreira",
-      "email": "sofia@email.com"
+      "id": "10"
     }
   ],
   "jobs": [
