@@ -1,5 +1,5 @@
 window.onload = () => {
-  carregarVagas();
+ carregarVagas();
   mostrarCandidatos();
 };
 
@@ -38,7 +38,7 @@ function mostrarVagas(vagas) {
 function carregarCandidatos() {
   axios
     .get("http://localhost:3000/users")
-    .then((res) => mostrarCandidatos(res.data))
+    .then(res => mostrarCandidatos(res.data))
     .catch(() => mostrarErro("Erro ao buscar candidatos!"));
 }
 
